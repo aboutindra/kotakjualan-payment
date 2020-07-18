@@ -2,11 +2,12 @@ const commands = require('./command');
 const Commands = new commands();
 
 const getPayment = (param) => {
-    Commands.createPayment(param);
+    return Commands.createPayment(param);
 }
 
-const updatePayment = (idPayment, statusPayment) => {
-    Commands.updateStatusPayment(idPayment, statusPayment)
+const updatePayment = async (idPayment, statusPayment) => {
+    console.log("Command Handler : ", await Commands.updateStatusPayment(idPayment, statusPayment))
+    return Commands.updateStatusPayment(idPayment, statusPayment)
 }
 
 module.exports = {

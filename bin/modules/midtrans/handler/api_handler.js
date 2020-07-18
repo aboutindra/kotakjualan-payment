@@ -15,9 +15,11 @@ const generatePayment = async (req, res) => {
 }
 
 const updateStatusPayment = async (req, res) => {
-    const idPayment = req.param.id_payment;
+    const idPayment = req.query.idPayment;
+    console.log('ID Payment : ', idPayment);
     const updatedData = {
-        'isPaid' : true
+        'isPaid' : true,
+        'updatedAt' : new Date()
     }
     res.send( await commandHandler.updatePayment(idPayment, updatedData))
 }

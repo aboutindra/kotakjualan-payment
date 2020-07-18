@@ -21,7 +21,7 @@ class Snap{
             let orderId = uuidv4();
             let snapParameter = {
                 transaction_details : {
-                    'order_id' : orderId,
+                    'idPayment' : orderId,
                     'gross_amount' : transactionParam.gross_amount,
                     'item_details' : transactionParam.item_details,
                     'customer_details' : transactionParam.customer_details,
@@ -35,13 +35,13 @@ class Snap{
                     }
                 }
             }
-            let generateTransaction = init.createTransaction(snapParameter);
+            let generateTransaction = console.log(await init.createTransaction(snapParameter));
 
             let insertParam = {
                 'isPaid' : false,
                 'createdAt' : new Date(),
                 'updatedAt' : new Date(),
-                ...snapParameter,
+                ...snapParameter.transaction_details,
                 ...generateTransaction
             }
 
@@ -53,7 +53,7 @@ class Snap{
     }
 
     async updateStatusPayment(idPayment, updatedData){
-        this.db.updatePayment(idPayment, updatedData);
+        return this.db.updatePayment(idPayment, updatedData);
     }
 
 }

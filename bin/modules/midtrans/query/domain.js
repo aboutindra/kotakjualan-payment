@@ -27,18 +27,32 @@ class Domain{
     async updatePayment(idPayment ,updatedParam){
         let status;
         const updatePayment = await this.query.updatePayment(idPayment, updatedParam);
-        if(updatePayment.acknowledged === true){
-            status = {
+        console.log("\n\nUpdate Payment : ", updatePayment.result)
+        if(updatePayment.result.nModified === 1 && updatePayment.result.ok === 1){
+             status = {
                 'code' : 200,
                 'message' : 'Payment Succesfuly updated!'
             }
-        } else {
-            status = {
+        } else if(updatePayment.result.ok === 0){
+            console.log('2')
+             status = {
                 'code' : 500,
                 'message' : 'Something went wrong while updating!'
             }
+        } else if(updatePayment.result.nModified === 0 && updatePayment.result.n === 1){
+            console.log('3')
+             status = {
+                'code' : 200,
+                'message' : 'Already updated!'
+            }
+        } else if(updatePayment.result.n === 0){
+            status = {
+                'code' : 404,
+                'message' : 'Not found!'
+            }
         }
-        return status;
+        console.log("Status : ",status)
+        return status
     }
 
     async findAll(){

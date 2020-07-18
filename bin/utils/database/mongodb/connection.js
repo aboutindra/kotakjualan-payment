@@ -1,5 +1,6 @@
 require('dotenv').config()
 const Mongo = require('mongodb').MongoClient;
+const {ObjectId} = require('mongodb');
 
 class Connection{
 
@@ -23,9 +24,14 @@ class Connection{
         }
     }
 
-    async getConnection(collection){
+    async getConnection(collection, data){
+        console.log('Collection : ', collection, ' | ', 'Data : ', data)
         let db = await this.init;
-        return db.collection(collection);
+        if(data.type === 'insertOne'){
+           return await db.collection(collection).insertOne(data.data);
+        } else if(data.type === 'updateOne'){
+            return await db.collection(collection).updateOne({ idPayment : data.data.idPayment }, {$set : data.data}, { upsert: false })
+        }
     }
 
 }

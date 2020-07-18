@@ -4,16 +4,26 @@ class Query{
 
     constructor() {
         this.con = new Con();
-        this.db = this.con.getConnection('PaymentHistory');
     }
 
     async insertPayment(paymentParam){
-        const insertStatus = await this.db.insert(paymentParam);
+        let param = {
+            'type' : 'insertOne',
+            'data' : paymentParam
+        }
+        const insertStatus = await this.con.getConnection('PaymentHistory', param);
         return insertStatus;
     }
 
     async updatePayment(idPayment, updatedData){
-        const updateStatus = await this.db.updateOne({idPayment:idPayment}, {$set : updatedData})
+        let param = {
+            'type' : 'updateOne',
+            'data' : {
+                'idPayment' : idPayment,
+                ...updatedData
+            }
+        }
+        const updateStatus = await this.con.getConnection('PaymentHistory', param)
         return updateStatus
     }
 
