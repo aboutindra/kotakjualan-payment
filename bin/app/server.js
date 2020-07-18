@@ -1,13 +1,18 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const Mongo = require('../utils/database/mongodb/connection');
 const midtransRoute = require('./midtrans');
 
 function AppServer(){
+
+    let startDB = new Mongo();
+    startDB.initConnection();
+
     this.server = new express();
 
     this.server.use(express.json());
-    this.server.use(express.urlencoded());
+    this.server.use(express.urlencoded({extended: true}));
     this.server.use(cookieParser())
     this.server.use(cors());
 

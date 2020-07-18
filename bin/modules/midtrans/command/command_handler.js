@@ -1,10 +1,15 @@
 const commands = require('./command');
 const Commands = new commands();
 
-const getTransaction = (param) => {
-    Commands.createTransaction(param);
+const getPayment = (param) => {
+    Commands.createPayment(param);
+}
+
+const updatePayment = (idPayment, statusPayment) => {
+    Commands.updateStatusPayment(idPayment, statusPayment)
 }
 
 module.exports = {
-    getTransaction
+    getPayment,
+    updatePayment
 };
