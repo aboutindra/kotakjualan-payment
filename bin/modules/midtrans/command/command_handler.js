@@ -6,7 +6,6 @@ const getPayment = (param) => {
 }
 
 const updatePayment = async (idPayment, statusPayment) => {
-    console.log("Command Handler : ", await Commands.updateStatusPayment(idPayment, statusPayment))
     return Commands.updateStatusPayment(idPayment, statusPayment)
 }
 

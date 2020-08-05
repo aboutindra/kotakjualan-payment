@@ -10,7 +10,7 @@ class Domain{
     async insertPayment(paymentParam){
         let status;
         const insertPayment = await this.query.insertPayment(paymentParam);
-        if(insertPayment.acknowledged === true){
+        if(insertPayment.result.ok === 1){
             status = {
                 'code' : 200,
                 'message' : 'Payment Succesfuly inserted!'
@@ -55,9 +55,9 @@ class Domain{
         return status
     }
 
-    async findAll(){
+    async find(idPayment){
         let status;
-        const findAll = await this.query.findAllPayment();
+        const findAll = await this.query.findAllPayment(idPayment);
         return findAll;
     }
 

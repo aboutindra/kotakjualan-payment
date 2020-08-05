@@ -27,8 +27,8 @@ class Query{
         return updateStatus
     }
 
-    async findAllPayment(){
-        const findAllPaymentData = await this.db.find();
+    async findAllPayment(idPayment){
+        const findAllPaymentData = await this.db.find({idPayment : idPayment});
         return findAllPaymentData
     }
 

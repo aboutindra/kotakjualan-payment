@@ -2,13 +2,13 @@ const commandHandler = require('../command/command_handler');
 
 const generatePayment = async (req, res) => {
     const gross_amount = req.body.gross_amount;
-    const item_details = req.body.item_details;
-    const customer_details = req.body.customer_details;
-
+    const customer_details = req.body.idAnggota;
+    const item = req.body.item_details;
+    console.log(item)
     const paymentParam = {
         gross_amount : gross_amount,
-        item_details : item_details,
-        customer_details : customer_details
+        item_details : item,
+        idAnggota : customer_details
     }
 
     res.send( await commandHandler.getPayment(paymentParam) )

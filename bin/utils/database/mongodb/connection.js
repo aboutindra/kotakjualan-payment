@@ -25,7 +25,6 @@ class Connection{
     }
 
     async getConnection(collection, data){
-        console.log('Collection : ', collection, ' | ', 'Data : ', data)
         let db = await this.init;
         if(data.type === 'insertOne'){
            return await db.collection(collection).insertOne(data.data);
